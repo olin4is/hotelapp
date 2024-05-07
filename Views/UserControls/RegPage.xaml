@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="кркр.Views.UserControls.RegPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:кркр.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1000" Background="White">
+    <Grid Background="#84bdb4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1" 
+               Margin="10" Width="200" Height="70"
+               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png"/>
+        <Border Background="White" CornerRadius="8" 
+                Grid.Column="1" Grid.Row="0" 
+                Grid.RowSpan="2" 
+                Width="440" 
+                Height="560" 
+                Margin="0 30 0 0"
+                VerticalAlignment="Center">
+        <StackPanel>
+            <TextBlock FontSize="28" HorizontalAlignment="Center" 
+                       Margin="0 10 0 0">Регистрация</TextBlock>
+            <TextBlock FontSize="20" HorizontalAlignment="Center" 
+                       Margin="0 10 0 5">ФИО</TextBlock>
+            <TextBox Text="{Binding Path=NewClient.FIO}" Margin="20 0" 
+                     Height="40" FontSize="20"></TextBox>
+            <TextBlock FontSize="20" HorizontalAlignment="Center" 
+                       Margin="0 10 0 5">Логин</TextBlock>
+            <TextBox Margin="20 0" Text="{Binding Path=NewUser.Login}" 
+                     FontSize="20" Height="40"></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="20 10 0 0" Width="200">
+                    <TextBlock FontSize="20"
+                               HorizontalAlignment="Center">Дата рождения</TextBlock>
+                    <DatePicker x:Name="dateOfBirth" SelectedDate="{Binding Path=NewClient.DateOfBirth}" 
+                                HorizontalAlignment="Center" Height="40" FontSize="20"
+                                Width="170"
+                                Margin="0 5"></DatePicker>
+                </StackPanel>
+                <StackPanel Margin="30 10 0 0" Width="160">
+                    <TextBlock FontSize="20" 
+                               HorizontalAlignment="Center">Номер телефона</TextBlock>
+                    <xctk:MaskedTextBox 
+                            Text="{Binding Path=NewClient.Phone}" Margin="0 5" Height="40" 
+                            Mask="00000000000" BorderBrush="Black" 
+                            CaretIndex="0" VerticalContentAlignment="Center"
+                            FontSize="20"></xctk:MaskedTextBox>
+                </StackPanel>
+                
+            </StackPanel>
+            <TextBlock FontSize="20" HorizontalAlignment="Center" 
+                       Margin="0 10 0 5">Паспортные данные (серия и номер)</TextBlock>
+            <xctk:MaskedTextBox
+                            Text="{Binding Path=NewClient.Passport}" 
+                            Margin="20 0"  Height="40"
+                            Mask="0000 000000" BorderBrush="Black"                                   
+                            CaretIndex="0" VerticalContentAlignment="Center"
+                            FontSize="20"></xctk:MaskedTextBox>
+            <TextBlock FontSize="20" HorizontalAlignment="Center"
+                       Margin="0 10 0 5">Пароль</TextBlock>
+            <PasswordBox PasswordChar="*" FontSize="20" 
+                         PasswordChanged="PasswordBox_PasswordChanged" 
+                         x:Name="PasswordBox" Margin="20 0 20 30"></PasswordBox>
+            <Button Command="{Binding Path=RegUserCommand}" Width="400"
+                    Background="#47857b" Foreground="White" Height="40"
+                    HorizontalAlignment="Center" FontSize="20"
+                    Content="Зарегистрироваться"/>
+        </StackPanel>
+        </Border>
+        <Button Command="{Binding Path=ShowAuthorizationPageCommand}" 
+                Grid.Column="2" Grid.Row="0" Width="140" HorizontalAlignment="Right"
+                Background="#47857b" Foreground="White"
+                Margin="20" FontSize="20"
+                Content="Войти"/>
+    </Grid>
+</UserControl>

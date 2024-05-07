@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="кркр.Views.UserControls.AddViolation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:кркр.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="#84bdb4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1" 
+               Margin="10" 
+               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png"/>
+        <Border Grid.Column="1" 
+                Grid.Row="0" 
+                Grid.RowSpan="2"
+                CornerRadius="8"
+                Width="470" 
+                Height="390" 
+                VerticalAlignment="Center" 
+                Background="White">
+            <StackPanel>
+                <TextBlock FontSize="28" 
+                           HorizontalAlignment="Center" 
+                           Margin="0 20 0 0" 
+                           Text="Добавление нарушения"/>
+                <TextBlock FontSize="24" 
+                           HorizontalAlignment="Center" 
+                           Margin="10"
+                           Text="Описание"/>
+                <TextBox Text="{Binding Path=NewViolation.Violation}" 
+                         Margin="20 0" Height="100"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         FontSize="20"></TextBox>
+                <TextBlock FontSize="24" 
+                           HorizontalAlignment="Center" 
+                           Margin="10"
+                           Text="Штраф"/>
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            Margin="0 0 0 30">
+                    <TextBox Text="{Binding Path=NewViolation.Fine}"
+                             FontSize="20" Width="150"/>
+                    <TextBlock Margin="5 0 0 0" 
+                               FontSize="20"
+                               VerticalAlignment="Center" 
+                               Text="руб."/>
+                </StackPanel>
+            
+                <Button Command="{Binding Path=AddViolationCommand}" 
+                        Height="40" 
+                        HorizontalAlignment="Center"
+                        Background="#47857b" 
+                        Foreground="White" 
+                        Margin="0 0 0 20" 
+                        FontSize="20" 
+                        Width="230"
+                        Content="Добавить"/>
+            </StackPanel>
+        </Border>
+        <Button Command="{Binding Path=ShowViolationsPageCommand}" 
+                Grid.Column="2" 
+                Grid.Row="0" 
+                Height="40" 
+                HorizontalAlignment="Right"  
+                Style="{StaticResource ExitButton}"
+                Width="30" Margin="10">
+            <Image Height="30" 
+                   Width="30" 
+                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+        </Button>
+    </Grid>
+</UserControl>

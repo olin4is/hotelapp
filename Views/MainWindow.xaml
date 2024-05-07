@@ -1,0 +1,70 @@
+﻿<Window x:Class="кркр.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:кркр.ViewModels"
+        xmlns:v ="clr-namespace:кркр.Views.UserControls"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="Отелло" 
+        MinHeight="700" 
+        MinWidth="1100" 
+        WindowState="Maximized">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:AuthorizationViewModel}">
+            <v:LoginPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RegistrationViewModel}">
+            <v:RegPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MainPageViewModel}">
+            <v:MainPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ClientsViewModel}">
+            <v:ClientsPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RoomsViewModel}">
+            <v:RoomsPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:BookingInfoViewModel}">
+            <v:BookingInfoPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ViolationsViewModel}">
+            <v:ViolationsPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:BookingsViewModel}">
+            <v:BookingsPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddClientViewModel}">
+            <v:AddClient/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:UpdateClientViewModel}">
+            <v:UpdateClient/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddRoomViewModel}">
+            <v:AddRoom/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:UpdateRoomViewModel}">
+            <v:UpdateRoom/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddViolationViewModel}">
+            <v:AddViolation/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:UpdateViolationViewModel}">
+            <v:UpdateViolation/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MoveOutViewModel}">
+            <v:MoveOutPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MoveInViewModel}">
+            <v:MoveInPage/>
+        </DataTemplate>
+        
+    </Window.Resources>
+    <Grid>
+        <ContentPresenter Content="{Binding Path=CurrentContentVM, 
+        UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>

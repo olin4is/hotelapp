@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="кркр.Views.UserControls.UpdateRoom"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:кркр.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="#84bdb4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1" 
+               Margin="10" 
+               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png"/>
+        <Border Grid.Column="1" 
+                Grid.Row="0" 
+                Grid.RowSpan="2"
+                CornerRadius="8"
+                Width="470" 
+                Height="420" 
+                VerticalAlignment="Center" 
+                Background="White">
+            <StackPanel>
+                <TextBlock FontSize="28" 
+                           HorizontalAlignment="Center" 
+                           Margin="0 20 0 0"  
+                           Text="Редактирование номера"/>
+                <TextBlock FontSize="20" 
+                           HorizontalAlignment="Center" 
+                           Margin="10" 
+                           Text="Описание"/>
+                <TextBox Text="{Binding Description}" 
+                         Margin="20 0" Height="75" FontSize="20"
+                         TextWrapping="Wrap" AcceptsReturn="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"></TextBox>
+                <StackPanel Margin="20 30 0 0" Orientation="Horizontal">
+                    <TextBlock FontSize="20" 
+                               VerticalAlignment="Center"  
+                               Text="Тип номера"/>
+                    <ComboBox SelectedValue="{Binding ComboBoxRoomType}" 
+                              ItemsSource="{Binding RoomTypes}" 
+                              SelectedValuePath="RoomType" x:Name="RoomTypeComboBox"
+                              Margin="10 0"  
+                              Height="40" FontSize="20"
+                              Width="310"
+                              DisplayMemberPath="RoomType"
+                              SelectionChanged="RoomTypeComboBox_SelectionChanged">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="20 30" 
+                    Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" 
+                               FontSize="20"  
+                               Text="Изображение номера"/>
+                    <Button Height="40" 
+                            Background="#47857b"
+                            Foreground="White" 
+                            Margin="50 5 0 0" 
+                            FontSize="20" 
+                            Width="150" 
+                            Content="Выбрать" 
+                            Command="{Binding Path=ImageCommand}"/>
+                </StackPanel>
+
+                <Button Command="{Binding Path=UpdateRoomCommand}" 
+                Height="40" 
+                Background="#47857b" 
+                Foreground="White" 
+                Margin="0 0 0 20" 
+                FontSize="20" 
+                Width="260"
+                HorizontalAlignment="Center"
+                Content="Редактировать"/>
+            </StackPanel>
+        </Border>
+        <Button Command="{Binding Path=ShowRoomsPageCommand}" 
+                Grid.Column="2" 
+                Grid.Row="0" 
+                Height="40" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                BorderBrush="Transparent" 
+                Background="Transparent"
+                Width="50" 
+                Margin="10">
+            <Image Height="30" 
+                   Width="30" 
+                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+        </Button>
+    </Grid>
+</UserControl>

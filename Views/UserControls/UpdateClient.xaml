@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="кркр.Views.UserControls.UpdateClient"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:кркр.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="#84bdb4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1" 
+               Margin="10" 
+               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png"/>
+        <Border Grid.Column="1" 
+                Grid.Row="0" 
+                Grid.RowSpan="2"
+                CornerRadius="8"
+                Width="470" 
+                Height="400" 
+                VerticalAlignment="Center" 
+                Background="White">
+            <StackPanel>
+                <TextBlock FontSize="28" 
+                           HorizontalAlignment="Center" 
+                           Margin="0 20 0 0"
+                           Text="Редактирование клиента"/>
+                <TextBlock FontSize="20" 
+                           HorizontalAlignment="Center" 
+                           Margin="10"
+                           Text="ФИО"/>
+                <TextBox Text="{Binding FIO}" 
+                         Margin="20 0" 
+                         FontSize="20"
+                         Height="40"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="20 10 0 0" Width="200">
+                        <TextBlock FontSize="20"
+                                   HorizontalAlignment="Center">Дата рождения</TextBlock>
+                        <DatePicker x:Name="dateOfBirth" SelectedDate="{Binding DateOfBirth}" 
+                                    HorizontalAlignment="Center" Height="40" FontSize="20"
+                                    Width="170"
+                                    Margin="0 5"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Margin="30 10 0 0" 
+                                Width="160">
+                        <TextBlock FontSize="20" 
+                                   HorizontalAlignment="Center">Номер телефона</TextBlock>
+                        <xctk:MaskedTextBox Text="{Binding Phone}" Margin="0 5" Height="40" 
+                                            Mask="00000000000" BorderBrush="Black" 
+                                            CaretIndex="0" VerticalContentAlignment="Center"
+                                            FontSize="20"></xctk:MaskedTextBox>
+                    </StackPanel>
+
+                </StackPanel>
+                <TextBlock FontSize="20" 
+                           HorizontalAlignment="Center" 
+                           Margin="0 10 0 5">Паспортные данные (серия и номер)</TextBlock>
+                <xctk:MaskedTextBox Text="{Binding Passport}" 
+                                    Margin="20 0"  Height="40"
+                                    Mask="0000 000000" BorderBrush="Black"                                   
+                                    CaretIndex="0" VerticalContentAlignment="Center"
+                                    FontSize="20"></xctk:MaskedTextBox>
+                
+                <Button Command="{Binding Path=UpdateClientCommand, UpdateSourceTrigger=PropertyChanged}" 
+                        Height="40" 
+                        Background="#47857b"  
+                        Foreground="White"
+                        Margin="0 20 0 20" 
+                        FontSize="20" 
+                        HorizontalAlignment="Center"
+                        Width="230"
+                        Content="Редактировать"/>
+            </StackPanel>
+        </Border>
+        <Button Command="{Binding Path=ShowClientsPageCommand}" 
+                Grid.Column="2" 
+                Grid.Row="0" 
+                HorizontalAlignment="Right"
+                Margin="0 0 10 0"
+                Style="{StaticResource ExitButton}">
+            <Image Width="30"
+                   Height="30"
+                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+        </Button>
+    </Grid>
+</UserControl>
