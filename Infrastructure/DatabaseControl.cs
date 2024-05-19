@@ -273,23 +273,23 @@ namespace кркр.Infrastructure
                 return violations;
             }
         }
-        public static void UpdateClientBooking(Clients client)
-        {
-            using (DbAppContext ctx = new DbAppContext())
-            {
-                Clients clients = new Clients()
-                {
-                    Id = client.Id,
-                    FIO = client.FIO,
-                    DateOfBirth = client.DateOfBirth.ToUniversalTime(),
-                    Passport = client.Passport,
-                    Phone = client.Phone,
-                    User_id = client.User_id
-                };
-                ctx.Clients.Update(clients);
-                ctx.SaveChanges();
-            }
-        }
+        //public static void UpdateClientBooking(Clients client)
+        //{
+        //    using (DbAppContext ctx = new DbAppContext())
+        //    {
+        //        Clients clients = new Clients()
+        //        {
+        //            Id = client.Id,
+        //            FIO = client.FIO,
+        //            DateOfBirth = client.DateOfBirth.ToUniversalTime(),
+        //            Passport = client.Passport,
+        //            Phone = client.Phone,
+        //            User_id = client.User_id
+        //        };
+        //        ctx.Clients.Update(clients);
+        //        ctx.SaveChanges();
+        //    }
+        //}
         public static void UpdateClient(Clients client)
         {
             using (DbAppContext ctx = new DbAppContext())

@@ -28,7 +28,6 @@ namespace кркр.ViewModels
         public string Description { get; set; }
         public string Image { get; set; }
         public RoomTypes RoomType { get; set; }
-        public string ComboBoxFurniture { get; set; }
         public string ComboBoxRoomType {  get; set; }
         public ObservableCollection<RoomTypes> RoomTypes { get; set; }
         public RoomTypes selectedRoomType { get; set; }

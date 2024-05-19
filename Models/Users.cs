@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace кркр.Models
 {
-    public class Users : INotifyPropertyChanged
+    public class Users
     {
         private int _id;
         private string _role;
