@@ -14,10 +14,10 @@ namespace кркр.Views.UserControls
         public BookingsPage()
         {
             InitializeComponent();
-            if (Session.Role == "Клиент")
-            {
-                //Status.Visibility = Visibility.Hidden;
-            }
+            //if (Session.Role == "Клиент")
+            //{
+            //    Status1.Visibility = Visibility.Hidden;
+            //}
         }
 
         private void BookingsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

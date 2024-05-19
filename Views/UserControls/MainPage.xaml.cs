@@ -22,6 +22,7 @@ namespace кркр.Views.UserControls
                 Rooms.Visibility = Visibility.Hidden;
                 Departure.Visibility = Visibility.Hidden;
                 Violations.Visibility = Visibility.Hidden;
+                Arrival.Visibility = Visibility.Hidden;
             }
             
         }

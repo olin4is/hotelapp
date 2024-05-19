@@ -37,9 +37,11 @@ namespace кркр.ViewModels
             if (Session.Role == "Клиент")
             {
                 Bookings = DatabaseControl.GetClientBooking(Session.Id);
+                StatusInfo = Visibility.Hidden;
             } else if (Session.Role == "Админ")
             {
                 Bookings = DatabaseControl.GetBookings();
+                StatusInfo = Visibility.Visible;
             }
             
         }
@@ -64,6 +66,17 @@ namespace кркр.ViewModels
                     }
 
                 });
+            }
+        }
+
+        private Visibility _status;
+        public Visibility StatusInfo
+        {
+            get => _status;
+            set
+            {
+                _status = value;
+                OnPropertyChanged("Status");
             }
         }
 

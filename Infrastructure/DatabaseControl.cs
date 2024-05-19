@@ -66,7 +66,7 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms.Include(p => p.RoomTypesEntity).ToList().OrderBy(p => p.Id));
+                ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms.Include(p => p.RoomTypesEntity).OrderBy(p => p.Id));
                 return rooms;
             }
         }
@@ -82,8 +82,22 @@ namespace кркр.Infrastructure
                     "AND\r\n(\"Bookings\".\"DateOfDeparture\" NOT BETWEEN '" +
                     DateA + "' AND '" +
                     DateD + "')";
+
+                string query2 = "SELECT *" +
+                    "\r\nFROM \"Rooms\" " +
+                    "\r\nWHERE \"Id\" NOT IN (SELECT \"Room_id\" FROM \"Bookings\")";
+
                 ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms.FromSqlRaw(query).
-                    Include(p => p.RoomTypesEntity).ToList().OrderBy(p => p.Id));
+                    Include(p => p.RoomTypesEntity).OrderBy(p => p.Id));
+
+                ObservableCollection<Rooms> roomsWithoutBooking = new ObservableCollection<Rooms>(ctx.Rooms.FromSqlRaw(query2).
+                    Include(p => p.RoomTypesEntity).OrderBy(p => p.Id));
+
+                foreach (var room in roomsWithoutBooking)
+                {
+                    rooms.Add(room);
+                }
+
                 if (rooms.Count == 0)
                 {
                     rooms = GetRooms();

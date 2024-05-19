@@ -50,7 +50,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0 10 0 0"
                     HorizontalAlignment="Right" VerticalAlignment="Top">
-            <TextBlock x:Name="FIO" FontSize="20" Width="300"
+            <TextBlock x:Name="FIO" FontSize="20" Width="600"
                        VerticalAlignment="Center"
                        TextAlignment="Right"></TextBlock>
             <Button Command="{Binding Path=ShowAuthorizationPageCommand}" 
