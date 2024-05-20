@@ -54,7 +54,10 @@ namespace кркр.Infrastructure
             bool exist = false;
             using (DbAppContext ctx = new DbAppContext())
             {
-                List<Users> users = ctx.Users.Where(p => p.Login == user.Login && p.Password == user.Password).ToList();
+                List<Users> users = ctx.Users
+                    .Where(p => p.Login == user.Login && p.Password == user.Password)
+                    .ToList();
+
                 if (users.Count != 0)
                 {
                     exist = true;
@@ -66,7 +69,10 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms.Include(p => p.RoomTypesEntity).OrderBy(p => p.Id));
+                ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms
+                    .Include(p => p.RoomTypesEntity)
+                    .OrderBy(p => p.Id)
+                );
                 return rooms;
             }
         }
@@ -76,27 +82,22 @@ namespace кркр.Infrastructure
             {
                 string DateA = dateA.ToString("yyyy-MM-dd HH:mm:ss");
                 string DateD = dateD.ToString("yyyy-MM-dd HH:mm:ss");
-                string query = "SELECT DISTINCT \"Rooms\".\"Id\", \"Rooms\".\"Description\", \"Rooms\".\"Status\", \r\n\"Rooms\".\"Image\", \"Rooms\".\"RoomType_id\" \r\n" +
-                    "FROM \"Rooms\" \r\nJOIN \"Bookings\" ON \"Bookings\".\"Room_id\" = \"Rooms\".\"Id\"\r\n" +
-                    "WHERE \r\n(\"Bookings\".\"DateOfArrival\" NOT BETWEEN '" + DateA + "' AND '" + DateD + "') \r\n" +
-                    "AND\r\n(\"Bookings\".\"DateOfDeparture\" NOT BETWEEN '" +
-                    DateA + "' AND '" +
-                    DateD + "')";
 
-                string query2 = "SELECT *" +
-                    "\r\nFROM \"Rooms\" " +
-                    "\r\nWHERE \"Id\" NOT IN (SELECT \"Room_id\" FROM \"Bookings\")";
+                string query = $@"SELECT DISTINCT * FROM ""Rooms""
+                                 WHERE ""Id"" NOT IN 
+                                 (
+	                                 SELECT ""Room_id"" 
+ 	                                 FROM ""Bookings"" 
+ 	                                 WHERE (""DateOfArrival"" BETWEEN '{DateA}' AND '{DateD}') 
+ 	                                 OR (""DateOfDeparture"" BETWEEN '{DateA}' AND '{DateD}')
+                                 )";
 
-                ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms.FromSqlRaw(query).
-                    Include(p => p.RoomTypesEntity).OrderBy(p => p.Id));
-
-                ObservableCollection<Rooms> roomsWithoutBooking = new ObservableCollection<Rooms>(ctx.Rooms.FromSqlRaw(query2).
-                    Include(p => p.RoomTypesEntity).OrderBy(p => p.Id));
-
-                foreach (var room in roomsWithoutBooking)
-                {
-                    rooms.Add(room);
-                }
+                ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(
+                    ctx.Rooms
+                    .FromSqlRaw(query)
+                    .Include(p => p.RoomTypesEntity)
+                    .OrderBy(p => p.Id)
+                );
 
                 if (rooms.Count == 0)
                 {
@@ -109,17 +110,23 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                string query = "SELECT \"Bookings\".\"Id\", \"Bookings\".\"DateOfArrival\", " +
-                    "\"Bookings\".\"DateOfDeparture\"," +
-                    "\r\n\"Bookings\".\"Room_id\", \"Bookings\".\"User_id\", \"Bookings\".\"Status\", " +
-                    "\"Bookings\".\"Violation_id\"" +
-                    "\r\nFROM \"Bookings\"" +
-                    "\r\nJOIN \"Clients\" ON \"Bookings\".\"User_id\" = \"Clients\".\"User_id\"" +
-                    "\r\nWHERE LOWER(\"Clients\".\"FIO\") LIKE LOWER('%" + clientName + "%')";
-                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings.FromSqlRaw(query).
-                    Where(p => p.Status == "Не заселен").
-                    Include(p => p.RoomsEntity).ThenInclude(p => p.RoomTypesEntity).
-                    Include(p => p.UsersEntity).ThenInclude(p => p.ClientsEntity).ToList().OrderBy(p => p.Id));
+                string query = $@"SELECT ""Bookings"".""Id"", ""Bookings"".""DateOfArrival"", 
+	                                     ""Bookings"".""DateOfDeparture"",
+	                                     ""Bookings"".""Room_id"", ""Bookings"".""User_id"", 
+	                                     ""Bookings"".""Status"", ""Bookings"".""Violation_id""
+                                  FROM ""Bookings""
+                                  JOIN ""Clients"" ON ""Bookings"".""User_id"" = ""Clients"".""User_id""
+                                  WHERE LOWER(""Clients"".""FIO"") LIKE LOWER('%{clientName}%')";
+
+                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
+                    .FromSqlRaw(query)
+                    .Where(p => p.Status == "Не заселен")
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.UsersEntity)
+                    .ThenInclude(p => p.ClientsEntity)
+                    .OrderBy(p => p.Id));
+
                 if (bookings.Count == 0) 
                 { 
                     bookings = GetBookings();
@@ -131,17 +138,23 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                string query = "SELECT \"Bookings\".\"Id\", \"Bookings\".\"DateOfArrival\", " +
-                    "\"Bookings\".\"DateOfDeparture\"," +
-                    "\r\n\"Bookings\".\"Room_id\", \"Bookings\".\"User_id\", \"Bookings\".\"Status\", " +
-                    "\"Bookings\".\"Violation_id\"" +
-                    "\r\nFROM \"Bookings\"" +
-                    "\r\nJOIN \"Clients\" ON \"Bookings\".\"User_id\" = \"Clients\".\"User_id\"" +
-                    "\r\nWHERE LOWER(\"Clients\".\"FIO\") LIKE LOWER('%" + clientName + "%')";
-                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings.FromSqlRaw(query).
-                    Where(p => p.Status == "Заселен").
-                    Include(p => p.RoomsEntity).ThenInclude(p => p.RoomTypesEntity).
-                    Include(p => p.UsersEntity).ThenInclude(p => p.ClientsEntity).ToList().OrderBy(p => p.Id));
+                string query = @$"SELECT ""Bookings"".""Id"", ""Bookings"".""DateOfArrival"", 
+	                                     ""Bookings"".""DateOfDeparture"",
+	                                     ""Bookings"".""Room_id"", ""Bookings"".""User_id"", 
+	                                     ""Bookings"".""Status"", ""Bookings"".""Violation_id""
+                                  FROM ""Bookings""
+                                  JOIN ""Clients"" ON ""Bookings"".""User_id"" = ""Clients"".""User_id""
+                                  WHERE LOWER(""Clients"".""FIO"") LIKE LOWER('%{clientName}%')";
+
+                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
+                    .FromSqlRaw(query)
+                    .Where(p => p.Status == "Заселен")
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.UsersEntity)
+                    .ThenInclude(p => p.ClientsEntity)
+                    .OrderBy(p => p.Id));
+
                 if (bookings.Count == 0)
                 {
                     bookings = GetBookings();
@@ -153,9 +166,13 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings.
-                    Include(p => p.RoomsEntity).ThenInclude(p => p.RoomTypesEntity).
-                    Include(p => p.UsersEntity).ThenInclude(p => p.ClientsEntity).ToList().OrderByDescending(p => p.DateOfArrival));
+                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.UsersEntity)
+                    .ThenInclude(p => p.ClientsEntity)
+                    .OrderByDescending(p => p.DateOfArrival));
+
                 return bookings;
             }
         }
@@ -175,10 +192,14 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings.
-                    Where(p => p.Status == "Не заселен").
-                    Include(p => p.RoomsEntity).ThenInclude(p => p.RoomTypesEntity).
-                    Include(p => p.UsersEntity).ThenInclude(p => p.ClientsEntity).ToList().OrderByDescending(p => p.DateOfArrival));
+                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
+                    .Where(p => p.Status == "Не заселен")
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.UsersEntity)
+                    .ThenInclude(p => p.ClientsEntity)
+                    .OrderByDescending(p => p.DateOfArrival));
+
                 return bookings;
             }
         }
@@ -203,9 +224,14 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings.
-                    Where(p => p.User_id == userId).Include(p => p.RoomsEntity).ThenInclude(p => p.RoomTypesEntity).
-                    Include(p => p.UsersEntity).ThenInclude(p => p.ClientsEntity).ToList());
+                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
+                    .Where(p => p.User_id == userId)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.UsersEntity)
+                    .ThenInclude(p => p.ClientsEntity)
+                );
+
                 return bookings;
             }
         }
@@ -237,7 +263,7 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Clients> clients = new ObservableCollection<Clients>(ctx.Clients.ToList());
+                ObservableCollection<Clients> clients = new ObservableCollection<Clients>(ctx.Clients);
                 return clients;
             }
         }
@@ -245,7 +271,7 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Clients> clients = new ObservableCollection<Clients>(ctx.Clients.ToList());
+                ObservableCollection<Clients> clients = new ObservableCollection<Clients>(ctx.Clients);
                 return clients;
             }
         }
@@ -253,7 +279,7 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<RoomTypes> room = new ObservableCollection<RoomTypes>(ctx.RoomTypes.ToList());
+                ObservableCollection<RoomTypes> room = new ObservableCollection<RoomTypes>(ctx.RoomTypes);
                 return room;
             }
         }
@@ -261,7 +287,7 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Violations> violations = new ObservableCollection<Violations>(ctx.Violations.ToList());
+                ObservableCollection<Violations> violations = new ObservableCollection<Violations>(ctx.Violations);
                 return violations;
             }
         }
@@ -269,27 +295,13 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Violations> violations = new ObservableCollection<Violations>(ctx.Violations.Where(p => p.Id != 5).ToList());
+                ObservableCollection<Violations> violations = new ObservableCollection<Violations>(ctx.Violations
+                    .Where(p => p.Id != 5)
+                );
+
                 return violations;
             }
         }
-        //public static void UpdateClientBooking(Clients client)
-        //{
-        //    using (DbAppContext ctx = new DbAppContext())
-        //    {
-        //        Clients clients = new Clients()
-        //        {
-        //            Id = client.Id,
-        //            FIO = client.FIO,
-        //            DateOfBirth = client.DateOfBirth.ToUniversalTime(),
-        //            Passport = client.Passport,
-        //            Phone = client.Phone,
-        //            User_id = client.User_id
-        //        };
-        //        ctx.Clients.Update(clients);
-        //        ctx.SaveChanges();
-        //    }
-        //}
         public static void UpdateClient(Clients client)
         {
             using (DbAppContext ctx = new DbAppContext())
