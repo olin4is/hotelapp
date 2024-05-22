@@ -243,10 +243,10 @@ namespace кркр.ViewModels
         }
         public void BookingInfoCommand()
         {
-            ClientName = SelectedBooking.UsersEntity.ClientsEntity.FIO;
-            Passport = SelectedBooking.UsersEntity.ClientsEntity.Passport;
-            Phone = SelectedBooking.UsersEntity.ClientsEntity.Phone;
-            DateOfBirth = SelectedBooking.UsersEntity.ClientsEntity.DateOfBirth;
+            ClientName = SelectedBooking.UsersEntity.FIO;
+            Passport = SelectedBooking.UsersEntity.Passport;
+            Phone = SelectedBooking.UsersEntity.Phone;
+            DateOfBirth = SelectedBooking.UsersEntity.DateOfBirth;
             DateOfArrival = SelectedBooking.DateOfArrival;
             DateOfDeparture = SelectedBooking.DateOfDeparture;
             RoomId = SelectedBooking.Room_id;

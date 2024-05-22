@@ -10,11 +10,11 @@ namespace кркр.Infrastructure
 {
     public class DbAppContext : DbContext
     {
+        public DbSet<Roles> Roles { get; set; }
         public DbSet<Users> Users { get; set; }
-        public DbSet<Clients> Clients { get; set; }
         public DbSet<Rooms> Rooms { get; set; } 
         public DbSet<RoomTypes> RoomTypes { get; set; }
-        public DbSet<Admins> Admins { get; set; }
+        public DbSet<RoomStates> RoomStates { get; set; }
         public DbSet<Violations> Violations { get; set; }
         public DbSet<Bookings> Bookings { get; set; }
 
@@ -25,12 +25,12 @@ namespace кркр.Infrastructure
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>().HasOne(p => p.ClientsEntity).
-                WithOne(p => p.UsersEntity).HasForeignKey<Clients>(f => f.User_id);
-            modelBuilder.Entity<Users>().HasOne(p => p.AdminsEntity).
-                WithOne(p => p.UsersEntity).HasForeignKey<Admins>(f => f.User_id);
-            modelBuilder.Entity<RoomTypes>().HasMany(p => p.RoomsEntity).
-                WithOne(p => p.RoomTypesEntity);
+            modelBuilder.Entity<Roles>().HasMany(p => p.UsersEntity)
+                .WithOne(p => p.RolesEntity);
+            modelBuilder.Entity<RoomTypes>().HasMany(p => p.RoomsEntity)
+                .WithOne(p => p.RoomTypesEntity);
+            modelBuilder.Entity<RoomStates>().HasMany(p => p.RoomsEntity)
+                .WithOne(p => p.RoomStatesEntity);
             modelBuilder.Entity<Bookings>().HasOne(p => p.ViolationsEntity).
                 WithMany(p => p.BookingsEntity);
             modelBuilder.Entity<Bookings>().HasOne(p => p.UsersEntity).

@@ -53,17 +53,10 @@ namespace кркр.ViewModels
                         Users users = DatabaseControl.GetUser(user);
 
                         Session.Id = users.Id;
-                        Session.Role = users.Role;
-
-                        if (users.Role == "Админ")
-                        {
-                            Admins admin = DatabaseControl.GetAdmin(users.Id);
-                            Session.FIO = admin.FIO;
-                        } else
-                        {
-                            Clients client = DatabaseControl.GetClientById(users.Id);
-                            Session.FIO = client.FIO;
-                        }   
+                        Session.Role = users.Role_id == 1 
+                        ? "Админ" 
+                        : "Клиент";
+                        Session.FIO = users.FIO;
                     } else
                     {
                         MessageBox.Show("Неверный логин или пароль", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -31,10 +31,10 @@ namespace кркр.ViewModels
         public double Summary { get; set; }
         public DateTime DateArrival { get; set; }
         public DateTime DateDeparture { get; set; }
-        public Clients selectedClient { get; set; }
+        public Users selectedClient { get; set; }
         public Bookings Bookings { get; set; }
         public Rooms Room { get; set; }
-        public ObservableCollection<Clients> Clients { get; set; }
+        public ObservableCollection<Users> Clients { get; set; }
         public ImageSource Image
         {
             get => _image;
@@ -110,8 +110,8 @@ namespace кркр.ViewModels
                         {
                             if (selectedClient != null)
                             {
-                                Clients client = DatabaseControl.GetClient(selectedClient);
-                                userId = client.User_id;
+                                Users client = DatabaseControl.GetClient(selectedClient);
+                                userId = client.Id;
                             } else
                             {
                                 error = true;

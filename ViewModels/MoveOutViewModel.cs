@@ -29,7 +29,7 @@ namespace кркр.ViewModels
 
         public delegate void AddClientHandler();
         public event AddClientHandler AddClient;
-        public delegate void UpdateClientHandler(Clients clients);
+        public delegate void UpdateClientHandler(Users clients);
         public event UpdateClientHandler UpdateClient;
 
         public ObservableCollection<Bookings> Bookings { get; set; }
@@ -122,7 +122,7 @@ namespace кркр.ViewModels
 
         public void BookingInfoCommand()
         {
-            FIO = _selectedBooking.UsersEntity.ClientsEntity.FIO;
+            FIO = _selectedBooking.UsersEntity.FIO;
             DateOfArrival = _selectedBooking.DateOfArrival;
             DateOfDeparture = _selectedBooking.DateOfDeparture;
             Price = _selectedBooking.RoomsEntity.RoomTypesEntity.Price.ToString();
@@ -251,11 +251,11 @@ namespace кркр.ViewModels
             string headerName = "АКТ" + header +
                 $"\r\nот {DateTime.Today.ToString("dd.MM.yyyy")} г.";
             string firstPartText = $"Настоящий акт составлен о том, что в номере №{_selectedBooking.Room_id} ________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________";
-            string secondPartText = $"Ущерб нанесён гражданином {_selectedBooking.UsersEntity.ClientsEntity.FIO}";
+            string secondPartText = $"Ущерб нанесён гражданином {_selectedBooking.UsersEntity.FIO}";
             string thirdPartText = $"Всего на сумму: {FineText} руб.";
-            string fourPartText1 = $"С актом ознакомлен  _______________ {_selectedBooking.UsersEntity.ClientsEntity.FIO}";
+            string fourPartText1 = $"С актом ознакомлен  _______________ {_selectedBooking.UsersEntity.FIO}";
             string fourPartText2 = "                                                     (подпись)                (Ф.И.О. причинившего ущерб)";
-            string fivePartText1 = $"С гр. {_selectedBooking.UsersEntity.ClientsEntity.FIO} получено: _____________________________";
+            string fivePartText1 = $"С гр. {_selectedBooking.UsersEntity.FIO} получено: _____________________________";
             string fivePartText2 = "                   (Фамилия, имя, отчество)                                           (сумма прописью)";
             string sixPartText1 = $"Принял: Администратор {Session.FIO} _______________";
             string sixPartText2 = "                       (Должность, фамилия, имя, отчество)                          (подпись)";

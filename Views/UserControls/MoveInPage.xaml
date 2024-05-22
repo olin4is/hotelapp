@@ -137,7 +137,7 @@
                                     <Image Height="25" 
                                            Width="25" 
                                            Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\иконка человек.ico"/>
-                                    <TextBlock FontSize="24" Text="{Binding UsersEntity.ClientsEntity.FIO}"/>
+                                    <TextBlock FontSize="24" Text="{Binding UsersEntity.FIO}"/>
                                 </StackPanel>
 
                                 <TextBlock TextWrapping="WrapWithOverflow" 

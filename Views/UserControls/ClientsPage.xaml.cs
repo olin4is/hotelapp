@@ -33,7 +33,7 @@ namespace кркр.Views.UserControls
         {
             if (ClientsList.SelectedItem != null)
             {
-                (this.DataContext as ClientsViewModel).selectedClient = (Clients)ClientsList.SelectedItem;
+                (this.DataContext as ClientsViewModel).selectedClient = (Users)ClientsList.SelectedItem;
             }
         }
 

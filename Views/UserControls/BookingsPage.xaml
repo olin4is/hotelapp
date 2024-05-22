@@ -140,7 +140,7 @@
                                                Width="30" 
                                                Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\иконка человек.ico"/>
                                         <TextBlock FontSize="24" 
-                                                    Text="{Binding UsersEntity.ClientsEntity.FIO}"/>
+                                                    Text="{Binding UsersEntity.FIO}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="25" 

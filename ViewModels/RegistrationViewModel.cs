@@ -14,7 +14,6 @@ namespace кркр.ViewModels
     public class RegistrationViewModel
     {
         private Users _newUser = new Users();
-        private Clients _newClient = new Clients();
         private RelayCommand _showAuthorizationPage;
         private RelayCommand _regUser;
         public delegate void AuthorizationHandler();
@@ -22,7 +21,7 @@ namespace кркр.ViewModels
         public string Password;
         public RegistrationViewModel()
         {
-            _newClient.DateOfBirth = DateTime.Today;
+            _newUser.DateOfBirth = DateTime.Today;
         }
         public RelayCommand ShowAuthorizationPageCommand
         {
@@ -42,14 +41,6 @@ namespace кркр.ViewModels
                 _newUser = value;
             }
         }
-        public Clients NewClient
-        {
-            get => _newClient;
-            set
-            {
-                _newClient = value;
-            }
-        }
         public RelayCommand RegUserCommand
         {
             get
@@ -61,25 +52,29 @@ namespace кркр.ViewModels
                         string regexLogin = @"[A-Za-z]+";
                         string regexPassword = @"^\s*$";
                         string regexDate = @"\d{4}-\d{2}-\d{2}";
-                        if (_newClient.FIO != null && _newClient.Passport != null && _newClient.Phone != null &&
+                        if (_newUser.FIO != null && _newUser.Passport != null && _newUser.Phone != null &&
                         _newUser.Login != null && Password != null)
                         {
-                            int indexPhone = _newClient.Phone.IndexOf('_');
-                            int indexPassport = _newClient.Passport.IndexOf("_");
+                            int indexPhone = _newUser.Phone.IndexOf('_');
+                            int indexPassport = _newUser.Passport.IndexOf("_");
                             if (indexPhone == -1 && indexPassport == -1)
                             {
-                                var fio = Regex.IsMatch(_newClient.FIO, regexFIO);
+                                var fio = Regex.IsMatch(_newUser.FIO, regexFIO);
                                 var login = Regex.IsMatch(_newUser.Login, regexLogin);
-                                var date = !Regex.IsMatch(_newClient.DateOfBirth.ToString(), regexDate);
-                                var phone = !Regex.IsMatch(_newClient.Phone, regexPassword);
-                                var passport = !Regex.IsMatch(_newClient.Passport, regexPassword);
+                                var date = !Regex.IsMatch(_newUser.DateOfBirth.ToString(), regexDate);
+                                var phone = !Regex.IsMatch(_newUser.Phone, regexPassword);
+                                var passport = !Regex.IsMatch(_newUser.Passport, regexPassword);
                                 if (fio && login && date && phone && passport)
                                 {
                                     Users user = new Users
                                     {
                                         Login = _newUser.Login,
                                         Password = Password,
-                                        Role = "Клиент"
+                                        FIO = _newUser.FIO,
+                                        Passport = _newUser.Passport,
+                                        DateOfBirth = _newUser.DateOfBirth.ToUniversalTime(),
+                                        Phone = _newUser.Phone,
+                                        Role_id = 2
                                     };
                                     bool exist = DatabaseControl.CheckUser(user);
                                     if (exist)
@@ -88,21 +83,14 @@ namespace кркр.ViewModels
                                     } else
                                     {
                                         DatabaseControl.AddUser(user);
-                                        Clients client = new Clients
-                                        {
-                                            FIO = _newClient.FIO,
-                                            Passport = _newClient.Passport,
-                                            DateOfBirth = _newClient.DateOfBirth.ToUniversalTime(),
-                                            Phone = _newClient.Phone,
-                                            User_id = user.Id
-                                        };
-                                        DatabaseControl.AddClient(client);
-                                        _newClient.FIO = "";
-                                        _newClient.Phone = "";
-                                        _newClient.Passport = "";
-                                        _newClient.DateOfBirth = DateTime.Today;
+                                        
+                                        _newUser.FIO = "";
+                                        _newUser.Phone = "";
+                                        _newUser.Passport = "";
+                                        _newUser.DateOfBirth = DateTime.Today;
                                         _newUser.Login = "";
                                         _newUser.Password = "";
+
                                         Register.Invoke();
                                     }
                                 } else

@@ -17,14 +17,6 @@ namespace кркр.Infrastructure
                 ctx.SaveChanges();
             }
         }
-        public static void AddClient(Clients client)
-        {
-            using (DbAppContext ctx = new DbAppContext())
-            {
-                ctx.Clients.Add(client);
-                ctx.SaveChanges();
-            }
-        }
         public static void AddBooking(Bookings bookings)
         {
             using (DbAppContext ctx = new DbAppContext())
@@ -71,6 +63,7 @@ namespace кркр.Infrastructure
             {
                 ObservableCollection<Rooms> rooms = new ObservableCollection<Rooms>(ctx.Rooms
                     .Include(p => p.RoomTypesEntity)
+                    .Include(p => p.RoomStatesEntity)
                     .OrderBy(p => p.Id)
                 );
                 return rooms;
@@ -96,6 +89,7 @@ namespace кркр.Infrastructure
                     ctx.Rooms
                     .FromSqlRaw(query)
                     .Include(p => p.RoomTypesEntity)
+                    .Include(p => p.RoomStatesEntity)
                     .OrderBy(p => p.Id)
                 );
 
@@ -115,17 +109,19 @@ namespace кркр.Infrastructure
 	                                     ""Bookings"".""Room_id"", ""Bookings"".""User_id"", 
 	                                     ""Bookings"".""Status"", ""Bookings"".""Violation_id""
                                   FROM ""Bookings""
-                                  JOIN ""Clients"" ON ""Bookings"".""User_id"" = ""Clients"".""User_id""
-                                  WHERE LOWER(""Clients"".""FIO"") LIKE LOWER('%{clientName}%')";
+                                  JOIN ""Users"" ON ""Bookings"".""User_id"" = ""Users"".""Id""
+                                  WHERE LOWER(""Users"".""FIO"") LIKE LOWER('%{clientName}%')";
 
                 ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
                     .FromSqlRaw(query)
                     .Where(p => p.Status == "Не заселен")
+                    .Include(p => p.UsersEntity)
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
-                    .Include(p => p.UsersEntity)
-                    .ThenInclude(p => p.ClientsEntity)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomStatesEntity)
                     .OrderBy(p => p.Id));
+
 
                 if (bookings.Count == 0) 
                 { 
@@ -143,8 +139,8 @@ namespace кркр.Infrastructure
 	                                     ""Bookings"".""Room_id"", ""Bookings"".""User_id"", 
 	                                     ""Bookings"".""Status"", ""Bookings"".""Violation_id""
                                   FROM ""Bookings""
-                                  JOIN ""Clients"" ON ""Bookings"".""User_id"" = ""Clients"".""User_id""
-                                  WHERE LOWER(""Clients"".""FIO"") LIKE LOWER('%{clientName}%')";
+                                  JOIN ""Users"" ON ""Bookings"".""User_id"" = ""Users"".""Id""
+                                  WHERE LOWER(""Users"".""FIO"") LIKE LOWER('%{clientName}%')";
 
                 ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
                     .FromSqlRaw(query)
@@ -152,7 +148,8 @@ namespace кркр.Infrastructure
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
                     .Include(p => p.UsersEntity)
-                    .ThenInclude(p => p.ClientsEntity)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomStatesEntity)
                     .OrderBy(p => p.Id));
 
                 if (bookings.Count == 0)
@@ -169,8 +166,9 @@ namespace кркр.Infrastructure
                 ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomStatesEntity)
                     .Include(p => p.UsersEntity)
-                    .ThenInclude(p => p.ClientsEntity)
                     .OrderByDescending(p => p.DateOfArrival));
 
                 return bookings;
@@ -180,10 +178,14 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings.
-                    Where(p => p.Status == "Заселен").
-                    Include(p => p.RoomsEntity).ThenInclude(p => p.RoomTypesEntity).
-                    Include(p => p.UsersEntity).ThenInclude(p => p.ClientsEntity).ToList().OrderByDescending(p => p.DateOfArrival));
+                ObservableCollection<Bookings> bookings = new ObservableCollection<Bookings>(ctx.Bookings
+                    .Where(p => p.Status == "Заселен")
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomStatesEntity)
+                    .Include(p => p.UsersEntity)
+                    .OrderByDescending(p => p.DateOfArrival));
                 return bookings;
             }
         }
@@ -196,8 +198,9 @@ namespace кркр.Infrastructure
                     .Where(p => p.Status == "Не заселен")
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomStatesEntity)
                     .Include(p => p.UsersEntity)
-                    .ThenInclude(p => p.ClientsEntity)
                     .OrderByDescending(p => p.DateOfArrival));
 
                 return bookings;
@@ -208,16 +211,16 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                Users user = ctx.Users.First(p => p.Login == users.Login);
+                Users user = ctx.Users.FirstOrDefault(p => p.Login == users.Login);
                 return user;
             }
         }
-        public static Clients GetClientById(int Id)
+        public static Users GetClientById(int user_id)
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                Clients client = ctx.Clients.First(p => p.User_id == Id);
-                return client;
+                Users user = ctx.Users.FirstOrDefault(p => p.Id == user_id);
+                return user;
             }
         }
         public static ObservableCollection<Bookings> GetClientBooking(int userId)
@@ -228,26 +231,36 @@ namespace кркр.Infrastructure
                     .Where(p => p.User_id == userId)
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
+                    .Include(p => p.RoomsEntity)
+                    .ThenInclude(p => p.RoomStatesEntity)
                     .Include(p => p.UsersEntity)
-                    .ThenInclude(p => p.ClientsEntity)
                 );
 
                 return bookings;
             }
         }
-        public static Clients GetClient(Clients clients)
+        public static Users GetClient(Users clients)
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                Clients client = ctx.Clients.First(p => p.FIO == clients.FIO);
+                Users client = ctx.Users.First(p => p.FIO == clients.FIO);
                 return client;
             }
         }
-        public static Admins GetAdmin(int Id)
+        public static ObservableCollection<Users> GetFreeClients()
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                Admins admin = ctx.Admins.First(p => p.User_id == Id);
+                ObservableCollection<Users> clients = new ObservableCollection<Users>(ctx.Users
+                    .Where(p => p.Role_id == 2));
+                return clients;
+            }
+        }
+        public static Users GetAdmin(int id)
+        {
+            using (DbAppContext ctx = new DbAppContext())
+            {
+                Users admin = ctx.Users.First(p => p.Id == id);
                 return admin;
             }
         }
@@ -259,19 +272,11 @@ namespace кркр.Infrastructure
                 return roomType;
             }
         }
-        public static ObservableCollection<Clients> GetAllClients()
+        public static ObservableCollection<Users> GetAllClients()
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ObservableCollection<Clients> clients = new ObservableCollection<Clients>(ctx.Clients);
-                return clients;
-            }
-        }
-        public static ObservableCollection<Clients> GetFreeClients()
-        {
-            using (DbAppContext ctx = new DbAppContext())
-            {
-                ObservableCollection<Clients> clients = new ObservableCollection<Clients>(ctx.Clients);
+                ObservableCollection<Users> clients = new ObservableCollection<Users>(ctx.Users);
                 return clients;
             }
         }
@@ -302,11 +307,11 @@ namespace кркр.Infrastructure
                 return violations;
             }
         }
-        public static void UpdateClient(Clients client)
+        public static void UpdateClient(Users client)
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ctx.Clients.Update(client);
+                ctx.Users.Update(client);
                 ctx.SaveChanges();
             }
         }
@@ -334,11 +339,11 @@ namespace кркр.Infrastructure
                 ctx.SaveChanges();
             }
         }
-        public static void DeleteClient(Clients client)
+        public static void DeleteUser(Users client)
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                ctx.Clients.Remove(client);
+                ctx.Users.Remove(client);
                 ctx.SaveChanges();
             }
         }

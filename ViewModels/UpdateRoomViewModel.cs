@@ -99,9 +99,9 @@ namespace кркр.ViewModels
                             {
                                 Id = Id,
                                 Description = Description,
-                                Status = "Свободен",
                                 Image = Image,
-                                RoomType_id = selectedRoomType.Id
+                                RoomType_id = selectedRoomType.Id,
+                                RoomState_id = 1
                             };
                             DatabaseControl.UpdateRoom(room);
                             Rooms.Invoke();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,11 +12,14 @@ namespace кркр.Models
     public class Users
     {
         private int _id;
-        private string _role;
+        private int _role_id;
         private string _login;
         private string _password;
-        public Clients _clientsEntity;
-        public Admins _adminsEntity;
+        private string _fio;
+        private string? _phone;
+        private string? _passport;
+        private DateTime _dateOfBirth;
+        public Roles _rolesEntity;
         public List<Bookings> _bookingsEntity;
 
         public int Id
@@ -27,13 +31,14 @@ namespace кркр.Models
                 OnPropertyChanged("Id");
             }
         }
-        public string Role
+        [ForeignKey("RolesEntity")]
+        public int Role_id
         {
-            get { return _role; }
+            get { return _role_id; }
             set
             {
-                _role = value;
-                OnPropertyChanged("Role");
+                _role_id = value;
+                OnPropertyChanged("RoleId");
             }
         }
 
@@ -56,22 +61,52 @@ namespace кркр.Models
                 OnPropertyChanged("Password");
             }
         }
-        public Clients ClientsEntity
+        public string FIO
         {
-            get { return _clientsEntity; }
+            get { return _fio; }
             set
             {
-                _clientsEntity = value;
-                OnPropertyChanged("ClientsEntity");
+                _fio = value;
+                OnPropertyChanged("FIO");
             }
         }
-        public Admins AdminsEntity
+
+        public string? Phone
         {
-            get { return _adminsEntity; }
+            get { return _phone; }
             set
             {
-                _adminsEntity = value;
-                OnPropertyChanged("AdminsEntity");
+                _phone = value;
+                OnPropertyChanged("Phone");
+            }
+        }
+
+        public string? Passport
+        {
+            get { return _passport; }
+            set
+            {
+                _passport = value;
+                OnPropertyChanged("Pasport");
+            }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return _dateOfBirth; }
+            set
+            {
+                _dateOfBirth = value;
+                OnPropertyChanged("DateOfBirth");
+            }
+        }
+        public Roles RolesEntity
+        {
+            get { return _rolesEntity; }
+            set
+            {
+                _rolesEntity = value;
+                OnPropertyChanged("RolesEntity");
             }
         }
         public List<Bookings> BookingsEntity

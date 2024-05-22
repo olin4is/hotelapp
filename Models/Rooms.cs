@@ -13,10 +13,11 @@ namespace кркр.Models
     {
         private int _id;
         private string _description;
-        private string _status;
         private string _image;
         private int _roomType_id;
+        private int _roomState_id;
         private RoomTypes _roomTypesEntity;
+        private RoomStates _roomStatesEntity;
         private List<Bookings> _bookingsEntity;
 
         public int Id
@@ -38,6 +39,17 @@ namespace кркр.Models
                 OnPropertyChanged("RoomTypeId");
             }
         }   
+        [ForeignKey("RoomStatesEntity")]
+        public int RoomState_id
+        {
+            get { return _roomState_id; }
+            set
+            {
+                _roomState_id = value;
+                OnPropertyChanged("RoomStateId");
+            }
+        }   
+
         public string Description
         {
             get { return _description; }
@@ -47,17 +59,6 @@ namespace кркр.Models
                 OnPropertyChanged("Description");
             }
         }
-
-        public string Status
-        {
-            get { return _status; }
-            set
-            {
-                _status = value;
-                OnPropertyChanged("Status");
-            }
-        }
-
         public string Image
         {
             get { return _image; }
@@ -74,6 +75,15 @@ namespace кркр.Models
             {
                 _roomTypesEntity = value;
                 OnPropertyChanged("RoomTypesEntity");
+            }
+        }
+        public RoomStates RoomStatesEntity
+        {
+            get { return _roomStatesEntity; }
+            set
+            {
+                _roomStatesEntity = value;
+                OnPropertyChanged("RoomStatesEntity");
             }
         }
         public List<Bookings> BookingsEntity

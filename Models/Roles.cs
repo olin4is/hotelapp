@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace кркр.Models
 {
-    public class Admins
+    public class Roles
     {
         private int _id;
-        private int _user_id;
-        private string _fio;
-        private string _phone;
-        private Users _usersEntity;
+        private string _role;
+        public List<Users> _usersEntity;
 
         public int Id
         {
@@ -25,36 +23,16 @@ namespace кркр.Models
                 OnPropertyChanged("Id");
             }
         }
-        public int User_id
+        public string Role
         {
-            get { return _user_id; }
+            get { return _role; }
             set
             {
-                _user_id = value;
-                OnPropertyChanged("UserId");
+                _role = value;
+                OnPropertyChanged("Role");
             }
         }
-        public string FIO
-        {
-            get { return _fio; }
-            set
-            {
-                _fio = value;
-                OnPropertyChanged("FIO");
-            }
-        }
-
-        public string Phone
-        {
-            get { return _phone; }
-            set
-            {
-                _phone = value;
-                OnPropertyChanged("Phone");
-            }
-        }
-
-        public Users UsersEntity
+        public List<Users> UsersEntity
         {
             get { return _usersEntity; }
             set
@@ -63,8 +41,6 @@ namespace кркр.Models
                 OnPropertyChanged("UsersEntity");
             }
         }
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -76,4 +52,3 @@ namespace кркр.Models
         }
     }
 }
-

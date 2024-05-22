@@ -94,7 +94,7 @@ namespace кркр.ViewModels
         {
             CurrentContentVM = _addViolation;
         }
-        public void ShowUpdateClientPage(Clients client)
+        public void ShowUpdateClientPage(Users client)
         {
             UpdateClientViewModel _updateClient = new UpdateClientViewModel(client);
             ClientsViewModel _clients = new ClientsViewModel();

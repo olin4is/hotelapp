@@ -24,10 +24,10 @@ namespace кркр.ViewModels
         private RelayCommand _showClientsStatus;
         public delegate void AddClientHandler();
         public event AddClientHandler AddClient;
-        public delegate void UpdateClientHandler(Clients clients);
+        public delegate void UpdateClientHandler(Users clients);
         public event UpdateClientHandler UpdateClient;
-        public ObservableCollection<Clients> Clients {  get; set; }
-        public Clients selectedClient { get; set; }
+        public ObservableCollection<Users> Clients {  get; set; }
+        public Users selectedClient { get; set; }
         public string SelectedStatus {  get; set; }
         public ClientsViewModel()
         {
@@ -62,8 +62,8 @@ namespace кркр.ViewModels
                         MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить клиента?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
-                            Clients client = DatabaseControl.GetClient(selectedClient);
-                            DatabaseControl.DeleteClient(client);
+                            Users client = DatabaseControl.GetClient(selectedClient);
+                            DatabaseControl.DeleteUser(client);
                             RefreshTable();
                         }
                     } else

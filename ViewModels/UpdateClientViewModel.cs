@@ -14,7 +14,7 @@ namespace кркр.ViewModels
 {
     public class UpdateClientViewModel : INotifyPropertyChanged
     {
-        private Clients _client = new Clients();
+        private Users _client = new Users();
         private bool _status;
         private RelayCommand _showClientsPage;
         private RelayCommand _getClientStatus;
@@ -28,8 +28,8 @@ namespace кркр.ViewModels
         public bool Check { get; set; }
         public string Passport { get; set; }
 
-        public UpdateClientViewModel(Clients client) { 
-            User_Id = client.User_id;
+        public UpdateClientViewModel(Users client) { 
+            User_Id = client.Id;
             FIO = client.FIO;
             DateOfBirth = client.DateOfBirth;
             Phone = client.Phone;
@@ -46,7 +46,7 @@ namespace кркр.ViewModels
                 });
             }
         }
-        public Clients UpdateClient
+        public Users UpdateClient
         {
             get => _client;
             set
@@ -71,15 +71,14 @@ namespace кркр.ViewModels
                             
                             if (Regex.IsMatch(FIO, regexFIO))
                             {
-                                Clients client = DatabaseControl.GetClientById(User_Id);
-                                Clients updateClient = new Clients
+                                Users client = DatabaseControl.GetClientById(User_Id);
+                                Users updateClient = new Users
                                 {
                                     Id = client.Id,
                                     FIO = FIO,
                                     Passport = Passport,
                                     DateOfBirth = DateOfBirth.ToUniversalTime(),
-                                    Phone = Phone,
-                                    User_id = User_Id
+                                    Phone = Phone
                             
                                 };
                                 DatabaseControl.UpdateClient(updateClient);

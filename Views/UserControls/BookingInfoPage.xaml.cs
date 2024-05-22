@@ -23,7 +23,7 @@ namespace кркр.Views.UserControls
         {
             if (ClientsComboBox.SelectedItem != null)
             {
-                (this.DataContext as BookingInfoViewModel).selectedClient = (Clients)ClientsComboBox.SelectedItem;
+                (this.DataContext as BookingInfoViewModel).selectedClient = (Users)ClientsComboBox.SelectedItem;
             }
             
         }

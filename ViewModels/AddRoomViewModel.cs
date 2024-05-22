@@ -68,9 +68,9 @@ namespace кркр.ViewModels
                             Rooms room = new Rooms
                             {
                                 Description = _newRoom.Description,
-                                Status = "Свободен",
                                 Image = _newRoom.Image,
-                                RoomType_id = selectedRoomType.Id
+                                RoomType_id = selectedRoomType.Id,
+                                RoomState_id = 1
                             };
                             DatabaseControl.AddRoom(room);
                             Rooms.Invoke();
