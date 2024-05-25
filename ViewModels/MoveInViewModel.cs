@@ -28,7 +28,6 @@ namespace кркр.ViewModels
         private RelayCommand _findBookingByClientCommand;
         private RelayCommand _createDocumentCommand;
         private RelayCommand _moveInCommand;
-        private RelayCommand _bookingInfoCommand;
         public delegate void MainHandler();
         public event MainHandler Main;
         private Bookings _selectedBooking;
@@ -251,7 +250,6 @@ namespace кркр.ViewModels
             DateOfDeparture = SelectedBooking.DateOfDeparture;
             RoomId = SelectedBooking.Room_id;
             RoomType = SelectedBooking.RoomsEntity.RoomTypesEntity.RoomType;
-            //RefreshTable();
             OnPropertyChanged("ClientName");
             OnPropertyChanged("Passport");
             OnPropertyChanged("Phone");

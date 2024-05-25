@@ -12,12 +12,12 @@ namespace кркр.ViewModels
     public class AppViewModel : INotifyPropertyChanged
     {
         private object _currentContentVM;
-        private AuthorizationViewModel _authorization = new AuthorizationViewModel();
-        private RegistrationViewModel _registration = new RegistrationViewModel();
-        private MainPageViewModel _main = new MainPageViewModel();
-        private AddClientViewModel _addClient = new AddClientViewModel();
-        private AddRoomViewModel _addRoom = new AddRoomViewModel();
-        private AddViolationViewModel _addViolation = new AddViolationViewModel();
+        private AuthorizationViewModel _authorization = new ();
+        private RegistrationViewModel _registration = new ();
+        private MainPageViewModel _main = new ();
+        private AddClientViewModel _addClient = new ();
+        private AddRoomViewModel _addRoom = new ();
+        private AddViolationViewModel _addViolation = new ();
         
         public object CurrentContentVM
         {
@@ -48,7 +48,7 @@ namespace кркр.ViewModels
         }
         public void ShowMainPage()
         {
-            ClientsViewModel _clients = new ClientsViewModel();
+            ClientsViewModel _clients = new ();
             CurrentContentVM = _main;
             
             _main.Clients += ShowClientsPage;
@@ -62,7 +62,7 @@ namespace кркр.ViewModels
         }
         public void ShowClientsPage()
         {
-            ClientsViewModel _clients = new ClientsViewModel();
+            ClientsViewModel _clients = new ();
             CurrentContentVM = _clients;
             _clients.AddClient += ShowAddClientPage;
             _clients.UpdateClient += ShowUpdateClientPage;
@@ -70,7 +70,7 @@ namespace кркр.ViewModels
         }
         public void ShowRoomsPage()
         {
-            RoomsViewModel _rooms = new RoomsViewModel();
+            RoomsViewModel _rooms = new ();
             CurrentContentVM = _rooms;
             _rooms.AddRoom += ShowAddRoomPage;
             _rooms.UpdateRoom += ShowUpdateRoomPage;
@@ -81,7 +81,7 @@ namespace кркр.ViewModels
         }
         public void ShowAddClientPage()
         {
-            ClientsViewModel _clients = new ClientsViewModel();
+            ClientsViewModel _clients = new ();
             _addClient.Client += _clients.RefreshTable;
             _addClient.Client += ShowClientsPage;
             CurrentContentVM = _addClient;
@@ -96,36 +96,36 @@ namespace кркр.ViewModels
         }
         public void ShowUpdateClientPage(Users client)
         {
-            UpdateClientViewModel _updateClient = new UpdateClientViewModel(client);
-            ClientsViewModel _clients = new ClientsViewModel();
+            UpdateClientViewModel _updateClient = new (client);
+            ClientsViewModel _clients = new ();
             CurrentContentVM = _updateClient;
             _updateClient.Client += ShowClientsPage;
             _updateClient.Client += _clients.RefreshTable;
         }
         public void ShowUpdateRoomPage(Rooms room) { 
-            UpdateRoomViewModel _updateRoom = new UpdateRoomViewModel(room);
-            RoomsViewModel _rooms = new RoomsViewModel();
+            UpdateRoomViewModel _updateRoom = new (room);
+            RoomsViewModel _rooms = new ();
             CurrentContentVM = _updateRoom;
             _updateRoom.Rooms += ShowRoomsPage;
             _updateRoom.Rooms += _rooms.RefreshTable;
         }
         public void ShowUpdateViolationPage(Violations violation) {
-            UpdateViolationViewModel _updateViolation = new UpdateViolationViewModel(violation);
-            ViolationsViewModel _violations = new ViolationsViewModel();
+            UpdateViolationViewModel _updateViolation = new (violation);
+            ViolationsViewModel _violations = new ();
             CurrentContentVM = _updateViolation;
             _updateViolation.Violations += ShowViolationsPage;
             _updateViolation.Violations += _violations.RefreshTable;
         }
         public void ShowBookingInfoPage(Rooms room, DateTime dateOfArrival, DateTime dateOfDeparture)
         {
-            BookingInfoViewModel _bookingInfo = new BookingInfoViewModel(room, dateOfArrival, dateOfDeparture);
+            BookingInfoViewModel _bookingInfo = new (room, dateOfArrival, dateOfDeparture);
             CurrentContentVM = _bookingInfo;
             _bookingInfo.Main += ShowMainPage;
             _bookingInfo.Main += _main.RefreshTable;
         }
         public void ShowViolationsPage()
         {
-            ViolationsViewModel _violations = new ViolationsViewModel();
+            ViolationsViewModel _violations = new ();
             CurrentContentVM = _violations;
             _violations.AddViolation += ShowAddViolationPage;
             _violations.UpdateViolation += ShowUpdateViolationPage;
@@ -135,21 +135,21 @@ namespace кркр.ViewModels
         }
         public void ShowBookingsPage()
         {
-            BookingsViewModel _bookings = new BookingsViewModel();
+            BookingsViewModel _bookings = new ();
             CurrentContentVM = _bookings;
             _bookings.Main += ShowMainPage;
             _main.Bookings += _bookings.RefreshTable;
         }
         public void ShowMoveOutPage()
         {
-            MoveOutViewModel _moveOut = new MoveOutViewModel();
+            MoveOutViewModel _moveOut = new ();
             CurrentContentVM = _moveOut;
             _moveOut.Main += ShowMainPage;
             _moveOut.Main += _main.RefreshTable;
         }
         public void ShowMoveInPage()
         {
-            MoveInViewModel _moveIn = new MoveInViewModel();
+            MoveInViewModel _moveIn = new ();
             CurrentContentVM = _moveIn;
             _moveIn.Main += ShowMainPage;
             _moveIn.Main += _main.RefreshTable;

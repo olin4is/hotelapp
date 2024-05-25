@@ -38,12 +38,15 @@ namespace кркр.Infrastructure
             modelBuilder.Entity<Bookings>().HasOne(p => p.RoomsEntity).
                 WithMany(p => p.BookingsEntity);
             modelBuilder.Entity<Bookings>().Property(p => p.DateOfDeparture).
-                HasConversion(
-                src => src.Kind == DateTimeKind.Utc ? src : DateTime.SpecifyKind(src, DateTimeKind.Utc),
-                dst => dst.Kind == DateTimeKind.Utc ? dst : DateTime.SpecifyKind(dst, DateTimeKind.Utc)
+                HasConversion
+                (
+                    src => src.Kind == DateTimeKind.Utc 
+                                    ? src 
+                                    : DateTime.SpecifyKind(src, DateTimeKind.Utc),
+                    dst => dst.Kind == DateTimeKind.Utc 
+                                    ? dst 
+                                    : DateTime.SpecifyKind(dst, DateTimeKind.Utc)
                 );
-
         }
-        
     }
 }
