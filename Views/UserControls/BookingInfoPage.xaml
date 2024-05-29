@@ -91,17 +91,23 @@
 
                         <TextBlock FontSize="24" Text="Клиент:" Margin="0 2 5 0"/>
                         <ComboBox x:Name="ClientsComboBox"
-							SelectedValuePath="Id"
-							SelectionChanged="ComboBox_SelectionChanged"
-							ItemsSource="{Binding Clients}"
-							HorizontalAlignment="Left"
-							Height="40"
-							Width="300">
-                            <ComboBox.ItemTemplate>
+							      SelectedValuePath="Id"
+                                  IsEditable="True"
+                                  SelectedItem="{Binding selectedClient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+								  Text="{Binding FilterText, Mode=TwoWay}"
+								  ItemsSource="{Binding Clients, UpdateSourceTrigger=PropertyChanged}"
+								  HorizontalAlignment="Left"
+                                  IsTextSearchEnabled="False"
+                                  StaysOpenOnEdit="True"
+                                  DisplayMemberPath="FIO"
+								  Height="40"
+								  Width="300"
+                                  FontSize="20">
+                            <!--<ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock FontSize="20" Text="{Binding FIO}"/>
                                 </DataTemplate>
-                            </ComboBox.ItemTemplate>
+                            </ComboBox.ItemTemplate>-->
                         </ComboBox>
 
                     </StackPanel>

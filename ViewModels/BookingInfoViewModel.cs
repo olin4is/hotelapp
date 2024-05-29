@@ -25,28 +25,41 @@ namespace кркр.ViewModels
         private ImageSource _image;
         private RelayCommand _addBooking;
         private Bookings _newBooking = new Bookings();
+        private string _filterText { get; set; }
+        private Users _selectedClient { get; set; }
         public string Description { get; set; }
         public string RoomType { get; set; }
         public decimal Price { get; set; }
         public double Summary { get; set; }
         public DateTime DateArrival { get; set; }
         public DateTime DateDeparture { get; set; }
-        public Users selectedClient { get; set; }
         public Bookings Bookings { get; set; }
         public Rooms Room { get; set; }
-        public ObservableCollection<Users> Clients { get; set; }
+        private ObservableCollection<Users> _clients;
+        public ObservableCollection<Users> Clients { get; set; } = new ObservableCollection<Users>();
         public ImageSource Image
         {
             get => _image;
             set
             {
                 _image = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Image));
             }
         }
-        
+        public Users selectedClient 
+        { 
+            get => _selectedClient; 
+            set
+            {
+                if (value != null)
+                    _selectedClient = value;
+                OnPropertyChanged(nameof(selectedClient));
+            }
+        }
+
         public BookingInfoViewModel(Rooms room, DateTime dateOfArrival, DateTime dateOfDeparture) {
-            Clients = DatabaseControl.GetFreeClients();
+            _clients = DatabaseControl.GetFreeClients();
+            Clients = _clients;
 
             Room = room;
             Description = room.Description;
@@ -75,6 +88,25 @@ namespace кркр.ViewModels
             }
 
             Image = _bitmapImage;
+        }
+        public string FilterText
+        {
+            get => _filterText;
+            set
+            {
+                _filterText = value;
+                OnPropertyChanged(nameof(FilterText));
+                FilterComboBoxItems();
+            }
+        }
+
+        private void FilterComboBoxItems()
+        {
+            Clients = new ObservableCollection<Users>(_clients
+                    .Where(x => x.FIO.ToLower().Contains(FilterText.ToLower()))
+                );
+            
+            OnPropertyChanged(nameof(Clients));
         }
         public RelayCommand ShowMainPageCommand
         {
