@@ -24,7 +24,7 @@
                 Grid.RowSpan="2"
                 CornerRadius="8"
                 Width="470" 
-                Height="390" 
+                Height="400" 
                 VerticalAlignment="Center" 
                 Background="White">
             <StackPanel>
@@ -35,20 +35,21 @@
                 <TextBlock FontSize="24" 
                            HorizontalAlignment="Center" 
                            Margin="10"
-                           Text="Описание"/>
+                           Text="Описание*"/>
                 <TextBox Text="{Binding Violation}" 
                          Margin="20 0" 
                          AcceptsReturn="True"
+                         TextWrapping="Wrap"
                          Height="100"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                          FontSize="20"></TextBox>
                 <TextBlock FontSize="24" 
                            HorizontalAlignment="Center" 
                            Margin="10"
-                           Text="Штраф"/>
+                           Text="Штраф*"/>
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Center" 
-                            Margin="0 0 0 30">
+                            Margin="0 0 0 10">
                     <TextBox Text="{Binding Fine}"
                              FontSize="20" 
                              Width="150"/>
@@ -57,7 +58,9 @@
                                VerticalAlignment="Center"
                                Text="руб."/>
                 </StackPanel>
-
+                <TextBlock Text="* - обязательно для заполнения"
+                           Margin="20 0 20 10"
+                           FontSize="16"/>
                 <Button Command="{Binding Path=UpdateViolationCommand}" 
                         Height="40" 
                         Background="#47857b" 

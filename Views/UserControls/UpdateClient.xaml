@@ -26,7 +26,7 @@
                 Grid.RowSpan="2"
                 CornerRadius="8"
                 Width="470" 
-                Height="400" 
+                Height="410" 
                 VerticalAlignment="Center" 
                 Background="White">
             <StackPanel>
@@ -37,7 +37,7 @@
                 <TextBlock FontSize="20" 
                            HorizontalAlignment="Center" 
                            Margin="10"
-                           Text="ФИО"/>
+                           Text="ФИО*"/>
                 <TextBox Text="{Binding FIO}" 
                          Margin="20 0" 
                          FontSize="20"
@@ -45,7 +45,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Margin="20 10 0 0" Width="200">
                         <TextBlock FontSize="20"
-                                   HorizontalAlignment="Center">Дата рождения</TextBlock>
+                                   HorizontalAlignment="Center">Дата рождения*</TextBlock>
                         <DatePicker x:Name="dateOfBirth" SelectedDate="{Binding DateOfBirth}" 
                                     HorizontalAlignment="Center" Height="40" FontSize="20"
                                     Width="170"
@@ -54,7 +54,7 @@
                     <StackPanel Margin="30 10 0 0" 
                                 Width="160">
                         <TextBlock FontSize="20" 
-                                   HorizontalAlignment="Center">Номер телефона</TextBlock>
+                                   HorizontalAlignment="Center">Номер телефона*</TextBlock>
                         <xctk:MaskedTextBox Text="{Binding Phone}" Margin="0 5" Height="40" 
                                             Mask="00000000000" BorderBrush="Black" 
                                             CaretIndex="0" VerticalContentAlignment="Center"
@@ -64,18 +64,20 @@
                 </StackPanel>
                 <TextBlock FontSize="20" 
                            HorizontalAlignment="Center" 
-                           Margin="0 10 0 5">Паспортные данные (серия и номер)</TextBlock>
+                           Margin="0 10 0 5">Паспортные данные (серия и номер)*</TextBlock>
                 <xctk:MaskedTextBox Text="{Binding Passport}" 
                                     Margin="20 0"  Height="40"
                                     Mask="0000 000000" BorderBrush="Black"                                   
                                     CaretIndex="0" VerticalContentAlignment="Center"
                                     FontSize="20"></xctk:MaskedTextBox>
-                
+                <TextBlock Text="* - обязательно для заполнения"
+                           Margin="20 10 20 10"
+                           FontSize="16"/>
                 <Button Command="{Binding Path=UpdateClientCommand, UpdateSourceTrigger=PropertyChanged}" 
                         Height="40" 
                         Background="#47857b"  
                         Foreground="White"
-                        Margin="0 20 0 20" 
+                        Margin="0 0 0 20" 
                         FontSize="20" 
                         HorizontalAlignment="Center"
                         Width="230"

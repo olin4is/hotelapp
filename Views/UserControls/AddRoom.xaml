@@ -35,7 +35,7 @@
                 <TextBlock FontSize="20" 
                            HorizontalAlignment="Center" 
                            Margin="10" 
-                           Text="Описание"/>
+                           Text="Описание*"/>
                 <TextBox Text="{Binding Path=NewRoom.Description}" 
                          Margin="20 0" Height="75" FontSize="20"
                          TextWrapping="Wrap" AcceptsReturn="True"
@@ -43,7 +43,7 @@
                 <StackPanel Margin="20 30 0 0" Orientation="Horizontal">
                     <TextBlock FontSize="20" 
                                VerticalAlignment="Center"  
-                               Text="Тип номера"/>
+                               Text="Тип номера*"/>
                     <ComboBox ItemsSource="{Binding RoomTypes}" 
                               SelectedValuePath="Id" 
                               x:Name="RoomTypeComboBox"
@@ -54,11 +54,11 @@
                               SelectionChanged="RoomTypeComboBox_SelectionChanged">
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="20 30" 
+                <StackPanel Margin="20 30 20 10" 
                             Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" 
                                FontSize="20"  
-                               Text="Изображение номера"/>
+                               Text="Изображение номера*"/>
                     <Button Height="40" 
                             Background="#47857b"
                             Foreground="White" 
@@ -68,7 +68,9 @@
                             Content="Выбрать" 
                             Command="{Binding Path=ImageCommand}"/>
                 </StackPanel>
-            
+                <TextBlock Text="* - обязательно для заполнения"
+                           Margin="20 0 20 10"
+                           FontSize="16"/>
                 <Button Command="{Binding Path=AddRoomCommand}" 
                         Height="40" 
                         Background="#47857b" 

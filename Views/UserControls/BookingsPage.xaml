@@ -124,7 +124,7 @@
                             <Grid Margin="0 15">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.5*"/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="530"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0"

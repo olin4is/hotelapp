@@ -31,17 +31,17 @@
             <TextBlock FontSize="28" HorizontalAlignment="Center" 
                        Margin="0 10 0 0">Регистрация</TextBlock>
             <TextBlock FontSize="20" HorizontalAlignment="Center" 
-                       Margin="0 10 0 5">ФИО</TextBlock>
+                       Margin="0 10 0 5">ФИО*</TextBlock>
             <TextBox Text="{Binding Path=NewUser.FIO}" Margin="20 0" 
                      Height="40" FontSize="20"></TextBox>
             <TextBlock FontSize="20" HorizontalAlignment="Center" 
-                       Margin="0 10 0 5">Логин</TextBlock>
+                       Margin="0 10 0 5">Логин*</TextBlock>
             <TextBox Margin="20 0" Text="{Binding Path=NewUser.Login}" 
                      FontSize="20" Height="40"></TextBox>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="20 10 0 0" Width="200">
                     <TextBlock FontSize="20"
-                               HorizontalAlignment="Center">Дата рождения</TextBlock>
+                               HorizontalAlignment="Center">Дата рождения*</TextBlock>
                     <DatePicker x:Name="dateOfBirth" SelectedDate="{Binding Path=NewUser.DateOfBirth}" 
                                 HorizontalAlignment="Center" Height="40" FontSize="20"
                                 Width="170"
@@ -49,7 +49,7 @@
                 </StackPanel>
                 <StackPanel Margin="30 10 0 0" Width="160">
                     <TextBlock FontSize="20" 
-                               HorizontalAlignment="Center">Номер телефона</TextBlock>
+                               HorizontalAlignment="Center">Номер телефона*</TextBlock>
                     <xctk:MaskedTextBox 
                             Text="{Binding Path=NewUser.Phone}" Margin="0 5" Height="40" 
                             Mask="00000000000" BorderBrush="Black" 
@@ -59,7 +59,7 @@
                 
             </StackPanel>
             <TextBlock FontSize="20" HorizontalAlignment="Center" 
-                       Margin="0 10 0 5">Паспортные данные (серия и номер)</TextBlock>
+                       Margin="0 10 0 5">Паспортные данные (серия и номер)*</TextBlock>
             <xctk:MaskedTextBox
                             Text="{Binding Path=NewUser.Passport}" 
                             Margin="20 0"  Height="40"
@@ -67,11 +67,14 @@
                             CaretIndex="0" VerticalContentAlignment="Center"
                             FontSize="20"></xctk:MaskedTextBox>
             <TextBlock FontSize="20" HorizontalAlignment="Center"
-                       Margin="0 10 0 5">Пароль</TextBlock>
+                       Margin="0 10 0 5">Пароль*</TextBlock>
             <PasswordBox PasswordChar="*" FontSize="20" 
                          PasswordChanged="PasswordBox_PasswordChanged" 
-                         x:Name="PasswordBox" Margin="20 0 20 30"></PasswordBox>
-            <Button Command="{Binding Path=RegUserCommand}" Width="400"
+                         x:Name="PasswordBox" Margin="20 0 20 10"></PasswordBox>
+                <TextBlock Text="* - обязательно для заполнения"
+                           Margin="20 0 20 10"
+                           FontSize="16"/>
+                <Button Command="{Binding Path=RegUserCommand}" Width="400"
                     Background="#47857b" Foreground="White" Height="40"
                     HorizontalAlignment="Center" FontSize="20"
                     Content="Зарегистрироваться"/>

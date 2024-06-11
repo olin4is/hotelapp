@@ -28,7 +28,16 @@ namespace кркр.ViewModels
         public void RefreshTable()
         {
             Bookings = null;
-            Bookings = DatabaseControl.GetBookings();
+            if (Session.Role == "Клиент")
+            {
+                Bookings = DatabaseControl.GetClientBooking(Session.Id);
+                StatusInfo = Visibility.Hidden;
+            }
+            else if (Session.Role == "Админ")
+            {
+                Bookings = DatabaseControl.GetBookings();
+                StatusInfo = Visibility.Visible;
+            }
             selectedBooking = null;
             OnPropertyChanged("Bookings");
         }

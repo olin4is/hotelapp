@@ -71,10 +71,9 @@ namespace кркр.ViewModels
                             
                             if (Regex.IsMatch(FIO, regexFIO))
                             {
-                                Users client = DatabaseControl.GetClientById(User_Id);
                                 Users updateClient = new Users
                                 {
-                                    Id = client.Id,
+                                    Id = User_Id,
                                     FIO = FIO,
                                     Passport = Passport,
                                     DateOfBirth = DateOfBirth.ToUniversalTime(),

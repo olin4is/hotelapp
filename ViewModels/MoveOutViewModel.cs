@@ -229,16 +229,16 @@ namespace кркр.ViewModels
             {
                 switch (v.Id)
                 {
-                    case 1:
+                    case 3:
                         header = header + "причинении вреда номеру от курения, ";
                         break;
-                    case 2:
+                    case 4:
                         header = header + "потере имущества, ";
                         break;
-                    case 3:
+                    case 1:
                         header = header + "порче имущества, ";
                         break;
-                    case 4:
+                    case 2:
                         header = header + "нарушении порядка, ";
                         break;
                     default:

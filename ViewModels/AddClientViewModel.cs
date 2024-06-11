@@ -23,6 +23,10 @@ namespace кркр.ViewModels
         public string Password { get; set; }
         public AddClientViewModel()
         {
+            SetDefault();
+        }
+        private void SetDefault()
+        {
             _newUser.FIO = "";
             _newUser.Phone = "";
             _newUser.Passport = "";
@@ -36,12 +40,7 @@ namespace кркр.ViewModels
             {
                 return _showClientsPage ?? new RelayCommand(obj =>
                 {
-                    _newUser.FIO = "";
-                    _newUser.Phone = "";
-                    _newUser.Passport = "";
-                    _newUser.DateOfBirth = DateTime.Today;
-                    _newUser.Login = "";
-                    _newUser.Password = "";
+                    SetDefault();
                     Client.Invoke();
                 });
             }
@@ -90,11 +89,15 @@ namespace кркр.ViewModels
                                         Role_id = 2
                                     };
                                     DatabaseControl.AddUser(user);
+                                    SetDefault();
                                     Client.Invoke();
                                 } else
                                 {
                                     MessageBox.Show("Неправильно введены данные", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Stop);
                                 }
+                            } else
+                            {
+                                MessageBox.Show("Неправильно введены данные", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Stop);
                             }
                                 
                         } else
