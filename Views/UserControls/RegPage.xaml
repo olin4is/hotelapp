@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Image Grid.Column="1" 
                Margin="10" Width="200" Height="70"
-               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png"/>
+               Style="{StaticResource LogoHorizontal}"/>
         <Border Background="White" CornerRadius="8" 
                 Grid.Column="1" Grid.Row="0" 
                 Grid.RowSpan="2" 

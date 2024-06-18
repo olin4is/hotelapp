@@ -32,7 +32,7 @@
         </StackPanel>
         <Button Command="{Binding Path=ShowFurnituresPageCommand}" Grid.Column="2" Grid.Row="0" Height="40" VerticalAlignment="Center" HorizontalAlignment="Right"  Background="White" 
                 BorderBrush="Transparent" Width="30" Margin="10">
-            <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+            <Image Style="{StaticResource BackIcon}"/>
         </Button>
     </Grid>
 </UserControl>

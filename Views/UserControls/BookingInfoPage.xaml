@@ -22,7 +22,7 @@
 		</Grid.RowDefinitions>
 		<StackPanel Background="#84bdb4" Grid.ColumnSpan="2">
 			<Image Margin="5"
-				   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png" 
+				   Style="{StaticResource LogoHorizontal}" 
 				   Height="50" 
 				   Width="150" 
 				   HorizontalAlignment="Left"/>
@@ -34,7 +34,7 @@
 			<TextBlock x:Name="FIO" Margin="0 15 0 10"></TextBlock>
 			<Button Style="{StaticResource ExitButton}" 
 					Command="{Binding Path=ShowMainPageCommand}">
-				<Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+				<Image Style="{StaticResource BackIcon}"/>
 			</Button>
 		</StackPanel>
 		<StackPanel Grid.Row="1" Orientation="Horizontal">

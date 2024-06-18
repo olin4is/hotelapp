@@ -74,7 +74,7 @@ namespace кркр.ViewModels
                     {
                         _img = openFileDialog;
                         
-                        _room.Image = Path.Combine("C:\\Users\\alin4\\Desktop\\учеба\\4 курс\\курсовой проект\\кркр", _img.SafeFileName);
+                        _room.Image = Path.Combine("C:\\Users\\alin4\\Desktop\\учеба\\4 курс\\курсовой проект\\кркр\\images", _img.SafeFileName);
                         File.Copy(_img.FileName, _room.Image, true);
                     }
                 });

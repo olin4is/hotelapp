@@ -72,6 +72,9 @@ namespace кркр.ViewModels
                     Session.Id = 0;
                     Session.FIO = "";
                     Session.Role = "";
+                    dateOfArrival = DateTime.Today;
+                    dateOfDeparture = DateTime.Today;
+                    Rooms = DatabaseControl.GetFreeRooms(dateOfArrival, dateOfDeparture);
                 });
             }
         }
@@ -135,7 +138,11 @@ namespace кркр.ViewModels
                     string dateD = dateOfDeparture.ToString();
                     if (selectedRoom != null)
                     {
-                        if (selectedRoom.Id != 0 && dateA != "01.01.0001 0:00:00" && dateD != "01.01.0001 0:00:00")
+                        if (selectedRoom.Id != 0 
+                            && dateA != "01.01.0001 0:00:00" 
+                            && dateD != "01.01.0001 0:00:00"
+                            && dateOfArrival >= DateTime.Today
+                            && dateOfDeparture >= DateTime.Today)
                         {
                             BookingInfo.Invoke(selectedRoom, dateOfArrival, dateOfDeparture);
                         } else

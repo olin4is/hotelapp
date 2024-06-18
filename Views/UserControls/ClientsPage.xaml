@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <StackPanel Background="#84bdb4" Grid.ColumnSpan="2">
             <Image Margin="5" 
-                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\лого горизонтальное голубое.png" 
+                   Style="{StaticResource LogoHorizontal}"
                    Height="50" 
                    Width="150" 
                    HorizontalAlignment="Left"/>
@@ -33,20 +33,20 @@
                     Command="{Binding Path=ShowMainPageCommand}">
                 <Image Width="30"
                        Height="30"
-                       Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+                       Style="{StaticResource BackIcon}"/>
             </Button>
         </StackPanel>
         <TextBlock Margin="10" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Text="Клиенты"/>
         
         <StackPanel Margin="0 0 10 0" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Style="{StaticResource ExitButton}" Command="{Binding ShowAddClientPageCommand}">
-                <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка добавить.png"></Image>
+                <Image Style="{StaticResource AddIcon}"></Image>
             </Button>
             <Button Style="{StaticResource ExitButton}" Command="{Binding ShowUpdateClientPageCommand}" Padding="4">
-                <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка редактировать.png"></Image>
+                <Image Style="{StaticResource EditIcon}"></Image>
             </Button>
             <Button Style="{StaticResource ExitButton}" Command="{Binding DeleteClientCommand}" Padding="3">
-                <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка удалить.png"></Image>
+                <Image Style="{StaticResource DeleteIcon}"></Image>
             </Button>
         </StackPanel>
         <ScrollViewer Margin="10 0" 

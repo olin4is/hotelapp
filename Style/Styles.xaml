@@ -38,5 +38,64 @@
             </Style>
         </Style.Resources>-->
     </Style>
-
+    <Style x:Key="LogoHorizontal" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\лого горизонтальное голубое.png"/>
+    </Style>
+    <Style x:Key="LogoVertical" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\лого вертикальное голубое.png"/>
+    </Style>
+    <Style x:Key="BackIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+    </Style>
+    <Style x:Key="AddIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка добавить.png"/>
+    </Style>
+    <Style x:Key="EditIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка редактировать.png"/>
+    </Style>
+    <Style x:Key="DeleteIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка удалить.png"/>
+    </Style>
+    <Style x:Key="MoveInIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка заселить.png"/>
+    </Style>
+    <Style x:Key="MoveOutIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка выселить.png"/>
+    </Style>
+    <Style x:Key="CalendarIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка календарь.png"/>
+    </Style>
+    <Style x:Key="ExitIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка выход.png"/>
+    </Style>
+    <Style x:Key="PhoneIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка номер телефона.png"/>
+    </Style>
+    <Style x:Key="PeopleIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка люди.png"/>
+    </Style>
+    <Style x:Key="PersonIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка человек.ico"/>
+    </Style>
+    <Style x:Key="RoomIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка номер.png"/>
+    </Style>
+    <Style x:Key="PriceIcon" TargetType="Image">
+        <Setter Property="Source" 
+                Value="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка цена.ico"/>
+    </Style>
 </ResourceDictionary>

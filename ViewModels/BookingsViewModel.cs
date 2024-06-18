@@ -62,11 +62,14 @@ namespace кркр.ViewModels
                 {
                     if (selectedBooking != null)
                     {
-                        MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить бронирование?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (result == MessageBoxResult.Yes)
+                        if (selectedBooking.Status == "Не заселен")
                         {
-                            DatabaseControl.DeleteBooking(selectedBooking);
-                            RefreshTable();
+                            MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить бронирование?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                DatabaseControl.DeleteBooking(selectedBooking);
+                                RefreshTable();
+                            }
                         }
                     }
                     else

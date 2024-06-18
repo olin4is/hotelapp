@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Image Grid.Column="1" 
                Margin="10" 
-               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png"/>
+               Style="{StaticResource LogoHorizontal}"/>
         <Border Grid.Column="1" 
                 Grid.Row="0" 
                 Grid.RowSpan="2"
@@ -81,7 +81,7 @@
                 Width="30" Margin="10">
             <Image Height="30" 
                    Width="30" 
-                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+                   Style="{StaticResource BackIcon}"/>
         </Button>
     </Grid>
 </UserControl>

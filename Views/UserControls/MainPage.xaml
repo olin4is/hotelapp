@@ -57,13 +57,13 @@
                     Margin="15 0" Background="Transparent" 
                     BorderThickness="0">
                 <Image Height="30" Width="30" 
-                       Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка выход.png"/>
+                       Style="{StaticResource ExitIcon}"/>
             </Button>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Grid.Row="0" 
                     Grid.RowSpan="5" Background="#84bdb4">
             <Image Margin="5 10 5 20" 
-                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого вертикальное голубое.png" 
+                   Style="{StaticResource LogoVertical}"
                    Height="120" Width="150" 
                    HorizontalAlignment="Center"/>
             <MenuItem x:Name="Bookings" FontSize="20"  
@@ -90,7 +90,7 @@
                       Command="{Binding Path=ShowMoveInPageCommand}"
                       Header="Заселить">
                 <MenuItem.Icon>
-                    <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\иконка заселить.png"/> 
+                    <Image Style="{StaticResource MoveInIcon}"/> 
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem x:Name="Departure" 
@@ -99,7 +99,7 @@
                       Command="{Binding Path=ShowMoveOutPageCommand}" 
                       Header="Выселить">
                 <MenuItem.Icon>
-                    <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\иконка выселить.png"/>
+                    <Image Style="{StaticResource MoveOutIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
         </StackPanel>
@@ -187,7 +187,7 @@
                                                Text="{Binding RoomTypesEntity.RoomType}" />
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="30" Width="30" Margin="0 0 5 0"  
-                                               Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\иконка люди.png"/>
+                                               Style="{StaticResource PeopleIcon}"/>
                                         <TextBlock TextWrapping="WrapWithOverflow" 
                                                FontSize="20" VerticalAlignment="Bottom"
                                                Text="{Binding Description}"/>

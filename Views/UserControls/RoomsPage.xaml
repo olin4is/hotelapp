@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <StackPanel Background="#84bdb4" Grid.ColumnSpan="2">
             <Image Margin="5" 
-                   Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\лого горизонтальное голубое.png" 
+                   Style="{StaticResource LogoHorizontal}"
                    Height="50" 
                    Width="150" 
                    HorizontalAlignment="Left"/>
@@ -32,24 +32,24 @@
                     Command="{Binding Path=ShowMainPageCommand}">
                 <Image Height="30" 
                        Width="30"
-                       Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка назад.png"/>
+                       Style="{StaticResource BackIcon}"/>
             </Button>
         </StackPanel>
         <TextBlock Grid.Row="1" Margin="10" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Text="Все номера"/>
         <StackPanel Margin="0 0 10 0" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Command="{Binding ShowAddRoomPageCommand}"
                     Style="{StaticResource ExitButton}">
-                <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка добавить.png"></Image>
+                <Image Style="{StaticResource AddIcon}"></Image>
             </Button>
             <Button Command="{Binding ShowUpdateRoomPageCommand}" 
                     Style="{StaticResource ExitButton}"
                     Padding="4">
-                <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка редактировать.png"></Image>
+                <Image Style="{StaticResource EditIcon}"></Image>
             </Button>
             <Button Command="{Binding DeleteRoomCommand}" 
                     Style="{StaticResource ExitButton}"
                     Padding="3">
-                <Image Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\кркр\images\иконка удалить.png"></Image>
+                <Image Style="{StaticResource DeleteIcon}"></Image>
             </Button>
         </StackPanel>
         <ScrollViewer Grid.Row="2" 
@@ -94,7 +94,7 @@
                                                 Value="White"/>
                                                 <Setter TargetName="border" 
                                                 Property="Margin"
-                                                Value="0 0 15 10"/>
+                                                Value="0 0 10 10"/>
                                             </Trigger>
                                             <Trigger Property="ListBoxItem.IsSelected" Value="False">
                                                 <Setter TargetName="border" 
@@ -111,7 +111,7 @@
                                                 Value="White"/>
                                                 <Setter TargetName="border" 
                                                 Property="Margin"
-                                                Value="0 0 15 10"/>
+                                                Value="0 0 10 10"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -132,7 +132,7 @@
                                        Text="{Binding RoomTypesEntity.RoomType}" />
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="30" Width="30" Margin="0 0 5 0"  
-                                       Source="C:\Users\alin4\Desktop\учеба\4 курс\курсовой проект\иконка люди.png"/>
+                                       Style="{StaticResource PeopleIcon}"/>
                                         <TextBlock TextWrapping="WrapWithOverflow" 
                                        FontSize="20" VerticalAlignment="Bottom"
                                        Text="{Binding Description}"/>

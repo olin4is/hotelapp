@@ -114,7 +114,7 @@ namespace кркр.Infrastructure
 
                 ObservableCollection<Bookings> bookings = new(ctx.Bookings
                     .FromSqlRaw(query)
-                    .Where(p => p.Status == "Не заселен")
+                    .Where(p => p.Status == "Не заселен" && p.DateOfArrival == DateTime.Today)
                     .Include(p => p.UsersEntity)
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
@@ -124,7 +124,7 @@ namespace кркр.Infrastructure
 
                 if (bookings.Count == 0) 
                 { 
-                    bookings = GetBookings();
+                    bookings = GetBookingsNotSelected();
                 }
                 return bookings;
             }
@@ -143,7 +143,7 @@ namespace кркр.Infrastructure
 
                 ObservableCollection<Bookings> bookings = new (ctx.Bookings
                     .FromSqlRaw(query)
-                    .Where(p => p.Status == "Заселен")
+                    .Where(p => p.Status == "Заселен" && p.DateOfDeparture == DateTime.Today)
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
                     .Include(p => p.UsersEntity)
@@ -153,7 +153,7 @@ namespace кркр.Infrastructure
 
                 if (bookings.Count == 0)
                 {
-                    bookings = GetBookings();
+                    bookings = GetBookingsSelected();
                 }
                 return bookings;
             }
@@ -177,14 +177,16 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new ())
             {
+                var date = DateTime.ParseExact("2024-06-17", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
                 ObservableCollection<Bookings> bookings = new (ctx.Bookings
-                    .Where(p => p.Status == "Заселен")
+                    .Where(p => p.Status == "Заселен" && p.DateOfDeparture == date.ToUniversalTime())
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomStatesEntity)
                     .Include(p => p.UsersEntity)
-                    .OrderByDescending(p => p.DateOfArrival));
+                    .OrderByDescending(p => p.DateOfDeparture));
                 return bookings;
             }
         }
@@ -193,8 +195,10 @@ namespace кркр.Infrastructure
         {
             using (DbAppContext ctx = new ())
             {
+                var date = DateTime.ParseExact("2024-06-17", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
                 ObservableCollection<Bookings> bookings = new (ctx.Bookings
-                    .Where(p => p.Status == "Не заселен")
+                    .Where(p => p.Status == "Не заселен" && p.DateOfArrival == date.ToUniversalTime())
                     .Include(p => p.RoomsEntity)
                     .ThenInclude(p => p.RoomTypesEntity)
                     .Include(p => p.RoomsEntity)
@@ -286,7 +290,7 @@ namespace кркр.Infrastructure
                 string query = @"SELECT * 
                                  FROM ""Users""
                                  WHERE ""Role_id"" = 2";
-                ObservableCollection<Users> clients = new(ctx.Users.FromSqlRaw(query));
+                ObservableCollection<Users> clients = new(ctx.Users.FromSqlRaw(query).OrderBy(p => p.FIO));
                 return clients;
             }
         }
